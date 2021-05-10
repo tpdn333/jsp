@@ -16,5 +16,18 @@
 	2. expression
 	3. declaration
 	 --%>
+	 
+	 <%
+	 // java code 주석
+	 /*
+	 java code 작성 가능...
+	 
+	 */
+	 System.out.println("Hello world");
+	 %>
 </body>
+	<% 
+	String str = "Hello";
+	out.write("<h1>scriptlet으로 작성한 코드</h1>");
+	%>
 </html>
