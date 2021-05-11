@@ -11,5 +11,16 @@
 <p>p114</p>
 <p>총9개</p>
 
+<%--
+request (HttpServletRequest)
+response (HttpServletResponse)
+pageContext (PageContext)
+session (HttpSession)
+application (ServletContext)
+out (JspWriter)
+config (ServletConfig)
+page (Object)
+exception (Throwable) skip
+ --%>
 </body>
 </html>
