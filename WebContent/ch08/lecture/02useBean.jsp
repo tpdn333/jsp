@@ -27,7 +27,7 @@
 			<br>
 			<h3>getProperty</h3>
 			제목 : <jsp:getProperty property="title" name="book1"/> <br>
-			저자 : <jsp:getProperty property="writer" name="book1"/> <br>s
+			저자 : <jsp:getProperty property="writer" name="book1"/> <br>
 			
 	</div>
 </body>
