@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="container">
-		가격은 <b>${FormatUtil.number(price, '#,##0' }</b>원 입니다.
+		가격은 <b> ${FormatUtil.number(price, '#,##0') }</b>원 입니다.
 	</div>
 </body>
 </html>
