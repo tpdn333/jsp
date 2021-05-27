@@ -1,6 +1,9 @@
 package sample;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +31,16 @@ public class BoardDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Delete doGet method 실행....");
 		
+		request.setCharacterEncoding("utf-8");
 		
+		String index = request.getParameter("index");
+		System.out.println(index);
+		
+		ServletContext application = request.getServletContext();
+		List<Board> list = (List<Board>) application.getAttribute("board");
+		
+		int i = Integer.parseInt(index);
+		Board board = list.remove(i);
 		
 		response.sendRedirect(request.getContextPath() + "/sample/list");
 	}
