@@ -30,19 +30,19 @@ public class BoardDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Delete doGet method 실행....");
-		
-		request.setCharacterEncoding("utf-8");
-		
 		String index = request.getParameter("index");
-		System.out.println(index);
+		int i = Integer.parseInt(index);
+		System.out.println(i);
 		
 		ServletContext application = request.getServletContext();
 		List<Board> list = (List<Board>) application.getAttribute("board");
 		
-		int i = Integer.parseInt(index);
 		Board board = list.remove(i);
+		request.setAttribute("board", board);
 		
-		response.sendRedirect(request.getContextPath() + "/sample/list");
+		String path = "/WEB-INF/sample/boardList.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
+//		response.sendRedirect(request.getContextPath() + "/sample/list");
 	}
 
 	/**

@@ -1,13 +1,16 @@
 package sample;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 public class datetest {
 	public static void main(String[] args) {
-		long time = System.currentTimeMillis();
-		SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss");
-		String nowDate = date.format(new Date(time));
-		System.out.println(nowDate);
+		
+		List<Board> list = new ArrayList<Board>(); 
+		Board bd = new Board();
+		bd.setTitle("title");
+		bd.setWriter("son");
+		list.add(bd);
+		
+		System.out.println(list.size());
 	}
 }

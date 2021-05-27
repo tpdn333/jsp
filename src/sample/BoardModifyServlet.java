@@ -38,8 +38,6 @@ public class BoardModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		
 		String index = request.getParameter("index");
 		int i = Integer.parseInt(index);
 		String title = request.getParameter("title");
