@@ -1,15 +1,35 @@
 package ch14.bean;
 
+import java.sql.Date;
+
 public class Employee {
-	private String id;
+	private int id;
 	private String lastName;
 	private String firstName;
+	private String notes;
+	private Date date;
 
-	public String getId() {
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
