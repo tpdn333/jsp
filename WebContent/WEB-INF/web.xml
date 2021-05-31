@@ -12,9 +12,9 @@
   
   <!-- ============================================================= -->
   
-  <listener>
+  <!-- <listener>
   	<listener-class>ch20.AppListener01</listener-class>
-  </listener>
+  </listener> -->
   
   <context-param>
   	<param-name>jdbcdriver</param-name>
