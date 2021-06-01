@@ -9,124 +9,177 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- ============================================================= -->
+  
+  <!-- <listener>
+  	<listener-class>ch20.AppListener01</listener-class>
+  </listener> -->
+  
   <context-param>
-    <param-name>jdbcdriver</param-name>
-    <param-value>com.mysql.jdbc.Driver</param-value>
+  	<param-name>jdbcdriver</param-name>
+  	<param-value>com.mysql.jdbc.Driver</param-value>
   </context-param>
+  
   <context-param>
-    <param-name>jdbcUrl</param-name>
-    <param-value>jdbc:mysql://localhost:3306/guestbook</param-value>
+  	<param-name>jdbcUrl</param-name>
+  	<param-value>jdbc:mysql://localhost:3306/guestbook</param-value>
   </context-param>
+  
+  <!-- ============================================================= -->
+  
   <listener>
-    <listener-class>sample.BoardAppListener</listener-class>
+  	<listener-class>sample.BoardAppListener</listener-class>
   </listener>
+  
+  <!-- ============================================================= -->
+  
   <session-config>
-    <session-timeout>30</session-timeout>
+  	<session-timeout>30</session-timeout>
   </session-config>
+  
+  <!-- ============================================================= -->
+  
   <servlet>
-    <servlet-name>servlet3</servlet-name>
-    <servlet-class>ch17.lecture.Servlet03</servlet-class>
+  	<servlet-name>servlet3</servlet-name>
+  	<servlet-class>ch17.lecture.Servlet03</servlet-class>
   </servlet>
+  
   <servlet-mapping>
-    <servlet-name>servlet3</servlet-name>
-    <url-pattern>/servlet3</url-pattern>
+  	<servlet-name>servlet3</servlet-name>
+  	<url-pattern>/servlet3</url-pattern>
   </servlet-mapping>
+  
+  <!-- ============================================================= -->
+  
   <servlet>
-    <servlet-name>now</servlet-name>
-    <servlet-class>ch17.textbook.NowServlet</servlet-class>
+  	<servlet-name>now</servlet-name>
+  	<servlet-class>ch17.textbook.NowServlet</servlet-class>
   </servlet>
+  
   <servlet-mapping>
-    <servlet-name>now</servlet-name>
-    <url-pattern>/now</url-pattern>
+  	<servlet-name>now</servlet-name>
+  	<url-pattern>/now</url-pattern>
   </servlet-mapping>
+  
+  <!-- ============================================================= -->
+  
   <servlet>
-    <servlet-name>servlet12</servlet-name>
-    <servlet-class>ch17.lecture.Servlet12InitParam</servlet-class>
-    <init-param>
-      <param-name>url</param-name>
-      <param-value>jtbc.mysql</param-value>
-    </init-param>
-    <init-param>
-      <param-name>password</param-name>
-      <param-value>wnddkdwjdqh</param-value>
-    </init-param>
+  	<servlet-name>servlet12</servlet-name>
+  	<servlet-class>ch17.lecture.Servlet12InitParam</servlet-class>
+  	<init-param>
+  		<param-name>url</param-name>
+  		<param-value>jtbc.mysql</param-value>
+  	</init-param>
+  	
+  	<init-param>
+  		<param-name>password</param-name>
+  		<param-value>wnddkdwjdqh</param-value>
+  	</init-param>
   </servlet>
+  
   <servlet-mapping>
-    <servlet-name>servlet12</servlet-name>
-    <url-pattern>/servlet12</url-pattern>
+  	<servlet-name>servlet12</servlet-name>
+  	<url-pattern>/servlet12</url-pattern>
   </servlet-mapping>
+  
+  <!-- ============================================================= -->
+  
   <servlet>
-    <servlet-name>servlet13</servlet-name>
-    <servlet-class>ch17.lecture.Servlet13InitParam</servlet-class>
-    <init-param>
-      <param-name>name</param-name>
-      <param-value>shrimp</param-value>
-    </init-param>
-    <init-param>
-      <param-name>home</param-name>
-      <param-value>korea</param-value>
-    </init-param>
+  	<servlet-name>servlet13</servlet-name>
+  	<servlet-class>ch17.lecture.Servlet13InitParam</servlet-class>
+  	<init-param>
+  		<param-name>name</param-name>
+  		<param-value>shrimp</param-value>
+  	</init-param>
+  	
+  	<init-param>
+  		<param-name>home</param-name>
+  		<param-value>korea</param-value>
+  	</init-param>
   </servlet>
+  
   <servlet-mapping>
-    <servlet-name>servlet13</servlet-name>
-    <url-pattern>/servlet13</url-pattern>
+  	<servlet-name>servlet13</servlet-name>
+  	<url-pattern>/servlet13</url-pattern>
   </servlet-mapping>
+  
+  <!-- ============================================================= -->
+  
   <servlet>
-    <servlet-name>servlet15</servlet-name>
-    <servlet-class>ch17.lecture.Servlet15Startup</servlet-class>
-    <load-on-startup>2</load-on-startup>
+  	<servlet-name>servlet15</servlet-name>
+  	<servlet-class>ch17.lecture.Servlet15Startup</servlet-class>
+  	<load-on-startup>2</load-on-startup>
   </servlet>
+  
   <servlet-mapping>
-    <servlet-name>servlet15</servlet-name>
-    <url-pattern>/servlet15</url-pattern>
+  	<servlet-name>servlet15</servlet-name>
+  	<url-pattern>/servlet15</url-pattern>
   </servlet-mapping>
+  
+  <!-- ============================================================= -->
+  
   <servlet>
-    <servlet-name>DBCPInit2</servlet-name>
-    <servlet-class>ch17.textbook.DBCPInit2</servlet-class>
-    <init-param>
-      <param-name>jdbcdriver</param-name>
-      <param-value>com.mysql.jdbc.Driver</param-value>
-    </init-param>
-    <init-param>
-      <param-name>jdbcUrl</param-name>
-      <param-value>jdbc:mysql://localhost:3306/chap14?characterEncoding=utf8</param-value>
-    </init-param>
-    <init-param>
-      <param-name>dbUser</param-name>
-      <param-value>jspexam</param-value>
-    </init-param>
-    <init-param>
-      <param-name>dbPass</param-name>
-      <param-value>jsppw</param-value>
-    </init-param>
-    <init-param>
-      <param-name>poolName</param-name>
-      <param-value>chap14</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
+  	<servlet-name>DBCPInit2</servlet-name>
+  	<servlet-class>ch17.textbook.DBCPInit2</servlet-class>
+  	<init-param>
+  		<param-name>jdbcdriver</param-name>
+  		<param-value>com.mysql.jdbc.Driver</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>jdbcUrl</param-name>
+  		<param-value>jdbc:mysql://localhost:3306/chap14?characterEncoding=utf8</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>dbUser</param-name>
+  		<param-value>jspexam</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>dbPass</param-name>
+  		<param-value>jsppw</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>poolName</param-name>
+  		<param-value>chap14</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
   </servlet>
+  
+  <!-- ============================================================= -->
+  
   <filter>
-    <filter-name>filter02</filter-name>
-    <filter-class>ch19.lecture.Filter02</filter-class>
+  	<filter-name>filter02</filter-name>
+  	<filter-class>ch19.lecture.Filter02</filter-class>
   </filter>
+  
   <filter-mapping>
-    <filter-name>filter02</filter-name>
-    <url-pattern>/filter02</url-pattern>
+  	<filter-name>filter02</filter-name>
+  	<url-pattern>/filter02</url-pattern>
   </filter-mapping>
+  
+  <!-- ============================================================= -->
+  
   <filter>
-    <filter-name>filter0301</filter-name>
-    <filter-class>ch19.lecture.Filter0301</filter-class>
+  	<filter-name>filter0301</filter-name>
+  	<filter-class>ch19.lecture.Filter0301</filter-class>
   </filter>
+  
   <filter-mapping>
-    <filter-name>filter0301</filter-name>
-    <url-pattern>/filter03</url-pattern>
+  	<filter-name>filter0301</filter-name>
+  	<url-pattern>/filter03</url-pattern>
   </filter-mapping>
+  
+  <!-- ============================================================= -->
+  
   <filter>
-    <filter-name>filter0302</filter-name>
-    <filter-class>ch19.lecture.Filter0302</filter-class>
+  	<filter-name>filter0302</filter-name>
+  	<filter-class>ch19.lecture.Filter0302</filter-class>
   </filter>
+  
   <filter-mapping>
-    <filter-name>filter0302</filter-name>
-    <url-pattern>/filter03</url-pattern>
+  	<filter-name>filter0302</filter-name>
+  	<url-pattern>/filter03</url-pattern>
   </filter-mapping>
+  
+  <!-- ============================================================= -->
 </web-app>
