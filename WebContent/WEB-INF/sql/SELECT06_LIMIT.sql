@@ -19,4 +19,4 @@ LIMIT 20, 10; -- 20부터 10개
 
 SELECT * FROM Customers
 ORDER BY CustomerID
-LIMIT 10, 5; -- 30부터 10개
+LIMIT 30, 10; -- 30부터 10개
