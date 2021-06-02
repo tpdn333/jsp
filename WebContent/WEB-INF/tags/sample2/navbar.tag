@@ -9,7 +9,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="nav nav-tabs">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="<%= request.getContextPath()%>/sample2/main" >메인</a>
       </li>
