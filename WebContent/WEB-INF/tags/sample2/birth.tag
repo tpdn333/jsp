@@ -5,7 +5,7 @@
 <label for="BIRTH">생년월일</label>
 <div class="row form-group">
 	<div class="col-4">
-		<input id="BIRTH" maxlength="4" placeholder="년(4자)" class="form-control" type="text" name="birth_yy" />
+		<input id="BIRTH" maxlength="4" placeholder="년(4자)" class="form-control" type="number" name="birth_yy" />
 	</div>
 	<div class="col-4">
 		<select class="form-control" name="birth_mm">
@@ -25,6 +25,6 @@
 		</select>
 	</div>
 	<div class="col-4">
-		<input maxlength="2" placeholder="일" class="form-control" type="text" name="birth_dd" />
+		<input maxlength="2" placeholder="일" class="form-control" type="number" name="birth_dd" />
 	</div>
 </div>

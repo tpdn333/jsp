@@ -30,7 +30,7 @@
       </li>
       </c:if>
       <li class="nav-item">
-        <a class="nav-link" href="<%= request.getContextPath()%>/sample2/list">목록보기</a>
+        <a hidden class="nav-link" href="<%= request.getContextPath()%>/sample2/list">목록보기</a>
       </li>
     </ul>
   </div>
