@@ -12,8 +12,9 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function () {
-		$("#pwsuccess, #pwdanger").hide();
+		$("#pwsuccess, #pwdanger, #needpw").hide();
 		$("#PASSWORD1, #PASSWORD2").on("keyup", function() {
+			$("#needpw").hide();
 			var pw1 = $("#PASSWORD1").val();
 			var pw2 = $("#PASSWORD2").val();
 			if(pw1 != "" || pw2 != ""){
@@ -26,7 +27,9 @@
 					$("#pwdanger").show();
 					$("#submit1").attr("disabled", "disabled");
 				}
+			
 			}
+			
 		});
 	});
 </script>
@@ -47,6 +50,7 @@
 				<label for="PASSWORD2">비밀번호 확인</label> 
 				<input id="PASSWORD2" class="form-control" type="password" aria-describedby="passworHelp"/>
 			</div>
+			<div id="needpw" class="alert alert-primary" role="alert">비밀번호를 입력해야 합니다.</div>
 			<div id="pwsuccess" class="alert alert-success" >비밀번호가 일치합니다.</div>
 			<div id="pwdanger" class="alert alert-danger" >비밀번호가 일치하지 않습니다.</div>
 			<div class="form-group">
