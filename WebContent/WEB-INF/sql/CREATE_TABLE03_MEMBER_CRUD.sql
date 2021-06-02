@@ -5,7 +5,11 @@ CREATE TABLE Member (
     password VARCHAR(255),
     name VARCHAR(255),
     birth DATE,
+    gender VARCHAR(10),
     inserted TIMESTAMP
 );
 
-SELECT * FROM Member
+SELECT * FROM Member;
+
+
+
