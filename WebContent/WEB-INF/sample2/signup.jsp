@@ -11,7 +11,22 @@
 
 <title>Insert title here</title>
 <script type="text/javascript">
+	var url = "${pageContext.request.contextPath}" + "/sample2/checked";
 	$(document).ready(function () {
+		$("#button1").click(function() {
+			var id = $("#ID").val();
+			$.post(url, {id : id}, function(data) {
+				if(data == 'ok') {
+					// 가입가능 메세지
+					$("#idHelp").text("사용가능한 아이디 입니다.");
+					$("#idHelp").attr("style", "color : #8080ff");
+				} else {
+					// 가입불가능 메세지
+					$("#idHelp").text("중복된 아이디 입니다.");
+					$("#idHelp").css("color", "#ff6666");
+				}
+			}) ;
+		});
 		$("#pwsuccess, #pwdanger, #needpw").hide();
 		$("#PASSWORD1, #PASSWORD2").on("keyup", function() {
 			$("#needpw").hide();
@@ -38,9 +53,15 @@
 	<div class="container mt-3">
 	<s2:navbar/>
 		<form id="signup" action="<%=request.getContextPath()%>/sample2/signup" method="post">
-			<div class="form-group">
-				<label for="ID">아이디</label> 
-				<input id="ID" class="form-control" type="text" name="id" />
+			<div class="row form-group">
+				<div class="col-10">
+					<label for="ID">아이디</label> 
+					<input id="ID" class="form-control" type="text" name="id" aria-describedby="idHelp"/>
+					<small style="color: red" id="idHelp" ></small>
+				</div>
+				<div class="col-2">
+					<button style="width: 100%" class="btn btn-primary mt-3" id="button1" type="button">중복확인</button>
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="PASSWORD1">비밀번호</label> 
@@ -70,10 +91,13 @@
 					<option value="">성별</option>
 					<option value="Male">남자</option>
 					<option value="Female">여자</option>
-					<option value="">선택 안함</option>
+					<option value="NULL">선택 안함</option>
 				</select>
 			</div>
 			<input disabled id="submit1" style="width: 100%" type="submit" class="btn btn-primary" value="가입하기"/>
+			<c:if test="${not empty message }">
+				<div class="alert alert-danger" >가입실패</div>
+			</c:if>
 		</form>
 	</div>
 </body>
