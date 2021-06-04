@@ -56,7 +56,7 @@
 			<div class="row form-group">
 				<div class="col-10">
 					<label for="ID">아이디</label> 
-					<input id="ID" class="form-control" type="text" name="id" aria-describedby="idHelp"/>
+					<input id="ID" class="form-control" type="text" name="id" aria-describedby="idHelp" required/>
 					<small style="color: red" id="idHelp" ></small>
 				</div>
 				<div class="col-2">
@@ -65,11 +65,11 @@
 			</div>
 			<div class="form-group">
 				<label for="PASSWORD1">비밀번호</label> 
-				<input id="PASSWORD1" class="form-control" type="password" name="password" />
+				<input id="PASSWORD1" class="form-control" type="password" name="password" required/>
 			</div>
 			<div class="form-group">
 				<label for="PASSWORD2">비밀번호 확인</label> 
-				<input id="PASSWORD2" class="form-control" type="password" aria-describedby="passworHelp"/>
+				<input id="PASSWORD2" class="form-control" type="password" aria-describedby="passworHelp" required/>
 			</div>
 			<div id="needpw" class="alert alert-primary" role="alert">비밀번호를 입력해야 합니다.</div>
 			<div id="pwsuccess" class="alert alert-success" >비밀번호가 일치합니다.</div>
@@ -80,8 +80,8 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text">이름</span>
 					</div>
-					<input placeholder="성" type="text" aria-label="Last name" class="form-control" name="lastName"> 
-					<input placeholder="이름" type="text" aria-label="First name" class="form-control" name="firstName">
+					<input placeholder="성" type="text" aria-label="Last name" class="form-control" name="lastName" required> 
+					<input placeholder="이름" type="text" aria-label="First name" class="form-control" name="firstName" required>
 				</div>
 			</div>
 			<s2:birth />
