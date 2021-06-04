@@ -18,7 +18,7 @@
 	<div class="container">
 	<s2:navbar/>
 		<h1> 로그인</h1>
-		<form action="${pageContext.request.contextPath }/sample2/login" method="post">
+		<form action="${pageContext.request.contextPath }/sample2/member/login" method="post">
 			아이디 <br>
 			<input type="text" name="id"/><br>
 			비밀번호 <br>

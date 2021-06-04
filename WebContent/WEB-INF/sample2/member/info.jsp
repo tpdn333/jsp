@@ -39,7 +39,7 @@
 <body>
 <div class="container">
 	<s2:navbar/>
-	<form id="form1" action="${pageContext.request.contextPath }/sample2/modify" method="post">
+	<form id="form1" action="${pageContext.request.contextPath }/sample2/member/modify" method="post">
 		아이디 : <br>
 		<input id="input1" type="text" name="id" value="${member.id }" readonly> <br>
 		비밀번호 : <br>
@@ -68,7 +68,7 @@
 </div>
 
 <div class="container">
-	<form id="form2" action="${pageContext.request.contextPath}/sample2/remove" method="post">
+	<form id="form2" action="${pageContext.request.contextPath}/sample2/member/remove" method="post">
 		<input id="submit2" type="submit" value="탈퇴">
 	</form>
 </div>

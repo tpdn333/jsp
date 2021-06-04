@@ -11,7 +11,7 @@
 
 <title>Insert title here</title>
 <script type="text/javascript">
-	var url = "${pageContext.request.contextPath}" + "/sample2/checked";
+	var url = "${pageContext.request.contextPath}" + "/sample2/member/checked";
 	$(document).ready(function () {
 		$("#button1").click(function() {
 			var id = $("#ID").val();
@@ -52,7 +52,7 @@
 <body>
 	<div class="container mt-3">
 	<s2:navbar/>
-		<form id="signup" action="<%=request.getContextPath()%>/sample2/signup" method="post">
+		<form id="signup" action="<%=request.getContextPath()%>/sample2/member/signup" method="post">
 			<div class="row form-group">
 				<div class="col-10">
 					<label for="ID">아이디</label> 
