@@ -28,9 +28,15 @@
       <li class="nav-item">
         <a class="nav-link" href="<%= request.getContextPath()%>/sample2/member/logout">로그아웃</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= request.getContextPath()%>/sample2/board/write">글쓰기</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= request.getContextPath()%>/sample2/member/list">회원 목록보기</a>
+      </li>
       </c:if>
       <li class="nav-item">
-        <a class="nav-link" href="<%= request.getContextPath()%>/sample2/member/list">목록보기</a>
+        <a class="nav-link" href="<%= request.getContextPath()%>/sample2/board/list">글 목록보기</a>
       </li>
     </ul>
   </div>
