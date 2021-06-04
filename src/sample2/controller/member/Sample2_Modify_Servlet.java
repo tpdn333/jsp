@@ -39,7 +39,6 @@ public class Sample2_Modify_Servlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
