@@ -12,7 +12,7 @@ import sample2.dao.MemberDAO;
 /**
  * Servlet implementation class Sample2_Checked_Servlet
  */
-@WebServlet("/sample2/checked")
+@WebServlet("/sample2/member/checked")
 public class Sample2_Checked_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
