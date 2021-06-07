@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sample2.bean.Board;
+import sample2.bean.BoardDTO;
 
 public class BoardDAO {
 	private String url;
@@ -74,6 +75,34 @@ public class BoardDAO {
 
 		return false;
 	}
+	
+	public List<BoardDTO> list2() {
+		List<BoardDTO> list = new ArrayList<>();
+		String sql = "SELECT b.id boardId, b.title title, m.name name, b.inserted " +
+					 "FROM Board b JOIN Member m " + 
+					 "ON b.memberId = m.id " + 
+					 "ORDER BY boardId DESC ";
+					
+		try(
+				Connection con = DriverManager.getConnection(url, user, password);
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				) {
+			while(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setBoardId(rs.getInt(1));
+				board.setTitle(rs.getString(2));
+				board.setMemberName(rs.getString(3));
+				board.setInserted(rs.getTimestamp(4));
+				
+				list.add(board);
+			}
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public List<Board> list() {
 		List<Board> list = new ArrayList<Board>();
@@ -102,6 +131,43 @@ public class BoardDAO {
 		return list;
 	}
 
+	public BoardDTO get2(int id) {
+		String sql = "SELECT b.id boardId, b.title title, b.body body, m.name memberName, b.inserted "
+					 + "FROM Board b JOIN Member m "
+					 + "ON b.memberId = m.id "
+					 + "WHERE b.id = ? ";
+		ResultSet rs = null;
+		try (
+				Connection con = DriverManager.getConnection(url, user, password);
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setInt(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setBoardId(id);
+				board.setTitle(rs.getString(2));
+				board.setBody(rs.getString(3));
+				board.setMemberName(rs.getString(4));
+				board.setInserted(rs.getTimestamp(5));
+				
+				return board;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
 	public Board get(int id) {
 		String sql = "SELECT id, title, body, memberId, inserted " +
 					 "FROM Board " +
@@ -150,6 +216,30 @@ public class BoardDAO {
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getBody());
 			pstmt.setInt(3, board.getId());
+			
+			int cnt = pstmt.executeUpdate();
+			
+			if(cnt > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+	
+	public boolean update2(BoardDTO board) {
+		String sql = "UPDATE Board " +
+			 	 	 "SET title = ?, " +
+			 	 	 "	  body = ? "+
+			 	 	 "WHERE id = ? ";
+		try (
+				Connection con = DriverManager.getConnection(url, user, password);
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getBody());
+			pstmt.setInt(3, board.getBoardId());
 			
 			int cnt = pstmt.executeUpdate();
 			
