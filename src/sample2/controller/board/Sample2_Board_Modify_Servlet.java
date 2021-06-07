@@ -2,20 +2,19 @@ package sample2.controller.board;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sample2.bean.Board;
+import sample2.bean.BoardDTO;
 import sample2.dao.BoardDAO;
 
 /**
  * Servlet implementation class Sample2_Board_Modify_Servlet
  */
-@WebServlet("/sample2/board/modify")
+@WebServlet("/sample2/board/modify/*")
 public class Sample2_Board_Modify_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,13 +42,13 @@ public class Sample2_Board_Modify_Servlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String body = request.getParameter("body");
 		
-		ServletContext application = request.getServletContext();
-		Board board = (Board) application.getAttribute("board");
+		BoardDAO dao = new BoardDAO();
+		BoardDTO board = dao.get2(Integer.parseInt(id));
+		
 		board.setTitle(title);
 		board.setBody(body);
-		
-		BoardDAO dao = new BoardDAO();
-		boolean ok = dao.update(board);
+	
+		boolean ok = dao.update2(board);
 		
 		String message = "";
 		if (ok) {
@@ -60,8 +59,8 @@ public class Sample2_Board_Modify_Servlet extends HttpServlet {
 		request.setAttribute("message", message);
 		request.setAttribute("board", board);
 		
-		String path = "/WEB-INF/sample2/board/detail?boardId=" + id + ".jsp";
-		request.getRequestDispatcher(path).forward(request, response);
+		String path = request.getContextPath() + "/sample2/board/detail?boardId=" + id;
+		response.sendRedirect(path);
 	}
 
 }

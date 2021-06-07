@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sample2.bean.Board;
+import sample2.bean.BoardDTO;
 import sample2.dao.BoardDAO;
 
 
@@ -38,9 +38,9 @@ public class Sample2_Board_Detail_Servlet extends HttpServlet {
 			response.sendRedirect(path);
 		} else {
 			BoardDAO dao = new BoardDAO();
-			Board board = dao.get(Integer.parseInt(id));
+			BoardDTO board = dao.get2(Integer.parseInt(id));
 			
-			request.setAttribute("board", board);
+			request.setAttribute("boards", board);
 			String path = "/WEB-INF/sample2/board/detail.jsp";
 			request.getRequestDispatcher(path).forward(request, response);
 		}
