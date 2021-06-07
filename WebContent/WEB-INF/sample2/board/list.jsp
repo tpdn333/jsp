@@ -28,9 +28,9 @@
 			<tbody>
 				<c:forEach items="${boards }" var="board" varStatus="status">
 					<tr>
-						<th scope="row">${status.count }</th>
-						<td><a href="<%= request.getContextPath()%>/sample2/board/detail?boardId=${board.id }">${board.title}</a></td>
-						<td>${board.memberIdHidden }</td>
+						<th scope="row">${board.boardId }</th>
+						<td><a href="<%= request.getContextPath()%>/sample2/board/detail?boardId=${board.boardId }">${board.title}</a></td>
+						<td>${board.memberName }</td>
 						<td>${board.timeAgo }</td>
 					</tr>
 				</c:forEach>

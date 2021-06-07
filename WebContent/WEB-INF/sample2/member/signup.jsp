@@ -77,9 +77,6 @@
 			<div class="form-group">
 				<label for="NAME">이름</label>
 				<div id="NAME" class="input-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text">이름</span>
-					</div>
 					<input placeholder="성" type="text" aria-label="Last name" class="form-control" name="lastName" required> 
 					<input placeholder="이름" type="text" aria-label="First name" class="form-control" name="firstName" required>
 				</div>

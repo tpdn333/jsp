@@ -15,6 +15,11 @@
 	<div class="container">
 		<s2:navbar/>
 		<h1> 환영합니다. </h1>
+		<form action="<%= request.getContextPath()%>/sample2/member/email">
+		<input type="text" name="email"/>
+		<button>제출</button>
+		</form>
+		
 	</div>
 </body>
 </html>

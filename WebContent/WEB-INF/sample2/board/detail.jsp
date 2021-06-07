@@ -34,18 +34,22 @@
 		<h1>글 보기</h1>
 		<div class="row justify-content-center">
 			<div class="col-8">
-				<form id="form1" action="${pageContext.request.contextPath }/sample2/board/modify" method="post">
+				<form id="form1" action="${pageContext.request.contextPath }/sample2/board/modify?boardId=${boards.boardId }" method="post">
 					<div class="form-group">
 						<label for="title1">제목</label> 
-						<input readonly value="${board.title }" name="title" type="text" class="form-control" id="title1" aria-describedby="titleHelp"> 
+						<input readonly value="${boards.title }" name="title" type="text" class="form-control" id="title1" aria-describedby="titleHelp"> 
 					</div>
 					<div class="form-group">
 						<label for="writer1">작성자</label> 
-						<input readonly value="${board.memberId }" name="memberId" type="text" class="form-control" id="memberId" />
+						<input readonly value="${boards.memberName }" name="memberId" type="text" class="form-control" id="memberId" />
 					</div>
 					<div class="form-group">
 						<label for="textarea1">본문</label>
-						<textarea readonly name="body" class="form-control" id="textarea1" rows="3"><c:out value="${board.body }"/></textarea>
+						<textarea readonly name="body" class="form-control" id="textarea1" rows="3"><c:out value="${boards.body }"/></textarea>
+					</div>
+					<div class="form-group">
+						<label for="date1">작성 시간</label>
+						<input readonly class="form-control" id="date1" value="${boards.timeAgo }"></input>
 					</div>
 					<button type="button" class="btn btn-primary" id=btn1>수정</button>
 					<!-- 버튼이 form안에있으면 submit이다 type 변경 -->
