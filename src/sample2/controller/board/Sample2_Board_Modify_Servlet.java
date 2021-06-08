@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sample2.bean.BoardDTO;
+import sample2.bean.Member;
 import sample2.dao.BoardDAO;
 
 /**
@@ -45,19 +46,30 @@ public class Sample2_Board_Modify_Servlet extends HttpServlet {
 		BoardDAO dao = new BoardDAO();
 		BoardDTO board = dao.get2(Integer.parseInt(id));
 		
-		board.setTitle(title);
-		board.setBody(body);
-	
-		boolean ok = dao.update2(board);
+		Member member = (Member) request.getSession().getAttribute("userLogined");
 		
-		String message = "";
-		if (ok) {
-			message = "변경 완료";
+		
+		if (board.getMemberId().equals(member.getId())) {
+			// 같은면 수정 
+			BoardDTO newBoard = new BoardDTO();
+			newBoard.setBoardId(Integer.parseInt(id));
+			newBoard.setTitle(title);
+			newBoard.setBody(body);
+			
+			boolean ok = dao.modify(newBoard);
+			
+			// 메세지 남기기
+			if (ok) {
+				request.getSession().setAttribute("message", "수정되었습니다.");
+			} else {
+				request.getSession().setAttribute("message", "수정시 오류 발생");
+			}
+			
 		} else {
-			message = "변경 실패";
+			// 메세지 남기기
+			request.getSession().setAttribute("message", "작성자가 아닙니다.");
+			
 		}
-		request.setAttribute("message", message);
-		request.setAttribute("board", board);
 		
 		String path = request.getContextPath() + "/sample2/board/detail?boardId=" + id;
 		response.sendRedirect(path);
