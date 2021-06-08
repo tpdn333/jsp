@@ -18,12 +18,22 @@
 			$("#form1").find("#title1, #textarea1").removeAttr("readonly");
 			$("#submit1").removeAttr("hidden");
 		});
-		$("#delete").click(function() {
+		<%-- $("#delete").click(function() {
 			var contextPath = '<%= request.getContextPath() %>';
 			var result = confirm("게시글을 삭제하시겠습니까?");
 			if(result) {
-				location.href = contextPath + "/sample2/board/delete";
+				location.href = contextPath + "/sample2/board/remove";
 			}
+		}); --%>
+		$("#delete").click(function(e) {
+			e.preventDefault();
+			
+			if (confirm("삭제 하시겠습니까?")) {
+				var path = '${pageContext.request.contextPath }/sample2/board/remove';
+				$("#form1").attr("action", path);
+				$("#form1").submit();
+			}
+			
 		});
 	});
 </script>
@@ -51,13 +61,17 @@
 						<label for="date1">작성 시간</label>
 						<input readonly class="form-control" id="date1" value="${boards.timeAgo }"></input>
 					</div>
-					<button type="button" class="btn btn-primary" id=btn1>수정</button>
-					<!-- 버튼이 form안에있으면 submit이다 type 변경 -->
-					<input hidden type="submit" class="btn btn-primary" id="submit1" value="등록"/>
-					<button type="button" class="btn btn-primary" id="delete">삭제</button>
+					<c:if test="${sessionScope.userLogined.id == boards.memberId }">
+						<button type="button" class="btn btn-primary" id=btn1>수정</button>
+						<!-- 버튼이 form안에있으면 submit이다 type 변경 -->
+						<input hidden type="submit" class="btn btn-primary" id="submit1" value="등록"/>
+						<button type="button" class="btn btn-primary" id="delete">삭제</button>
+						<input type="number" value="${boards.boardId }" name="boardId" hidden >
+					</c:if>
 				</form>
 			</div>
 		</div>
+		<s2:message/>
 	</div>
 </body>
 </html>
