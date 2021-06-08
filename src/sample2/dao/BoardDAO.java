@@ -54,24 +54,6 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-//		finally {
-//			if (con != null) {
-//				try {
-//					con.close();
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//			if (pstmt != null) {
-//				try {
-//					pstmt.close();
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		}
 
 		return false;
 	}
@@ -132,10 +114,15 @@ public class BoardDAO {
 	}
 
 	public BoardDTO get2(int id) {
-		String sql = "SELECT b.id boardId, b.title title, b.body body, m.name memberName, b.inserted "
-					 + "FROM Board b JOIN Member m "
-					 + "ON b.memberId = m.id "
-					 + "WHERE b.id = ? ";
+		String sql = "SELECT b.id boardId, "
+				   + "		 b.title title, "
+				   + "		 b.body body, "
+				   + "		 m.name memberName, "
+				   + " 		 m.id memberID ,"
+				   + "		 b.inserted "
+				   + "FROM Board b JOIN Member m "
+				   + "ON b.memberId = m.id "
+				   + "WHERE b.id = ? ";
 		ResultSet rs = null;
 		try (
 				Connection con = DriverManager.getConnection(url, user, password);
@@ -151,7 +138,8 @@ public class BoardDAO {
 				board.setTitle(rs.getString(2));
 				board.setBody(rs.getString(3));
 				board.setMemberName(rs.getString(4));
-				board.setInserted(rs.getTimestamp(5));
+				board.setMemberId(rs.getString(5));
+				board.setInserted(rs.getTimestamp(6));
 				
 				return board;
 			}
@@ -228,7 +216,7 @@ public class BoardDAO {
 		return false;
 	}
 	
-	public boolean update2(BoardDTO board) {
+	public boolean modify(BoardDTO board) {
 		String sql = "UPDATE Board " +
 			 	 	 "SET title = ?, " +
 			 	 	 "	  body = ? "+
@@ -250,6 +238,39 @@ public class BoardDAO {
 			e.printStackTrace();
 		} 
 		return false;
+	}
+	
+	public boolean remove(int id) {
+		String sql = "DELETE FROM Board " +
+			 	 	 "WHERE id = ? ";
+		try (
+				Connection con = DriverManager.getConnection(url, user, password);
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setInt(1, id);
+			
+			int cnt = pstmt.executeUpdate();
+			
+			return cnt == 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+
+	public void removeByMember(String id, Connection con) {
+		String sql = "DELETE FROM Board WHERE memberId = ?";
+		
+		try (
+			PreparedStatement pstmt = con.prepareStatement(sql);	
+				) {
+			
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
