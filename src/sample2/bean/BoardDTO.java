@@ -8,6 +8,7 @@ public class BoardDTO {
 	private String title;
 	private String body;
 	private String memberName;
+	private String memberId;
 	private Timestamp inserted;
 
 	public String getTimeAgo() {
@@ -15,20 +16,28 @@ public class BoardDTO {
 		long inserted = this.inserted.getTime();
 		long diff = (now - inserted) / 1000;
 		String msg = "";
-		if(diff < 60) {
+		if (diff < 60) {
 			msg = diff + "초 전";
-		} else if((diff /= 60) < 60) {
+		} else if ((diff /= 60) < 60) {
 			msg = diff + "분 전";
-		} else if((diff /= 60) < 24) {
+		} else if ((diff /= 60) < 24) {
 			msg = diff + "시간 전";
-		} else if((diff /= 24) < 30) {
+		} else if ((diff /= 24) < 30) {
 			msg = diff + "일 전";
 		} else {
 			msg = new SimpleDateFormat("yy/MM/dd").format(this.inserted);
 		}
 		return msg;
 	}
-	
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
 	public int getBoardId() {
 		return boardId;
 	}
