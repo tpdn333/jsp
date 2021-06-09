@@ -77,6 +77,7 @@ textarea:focus {
 					<button type="button" class="btn btn-primary" id="delete">삭제</button>
 					<input type="number" value="${boards.boardId }" name="boardId" hidden >
 				</c:if>
+				<button type="button" class="btn btn-primary" id="addBody">추가</button>
 			</form>
 		</div>
 		<s2:message/>
@@ -96,8 +97,8 @@ textarea:focus {
 			</div>
 		</div>
 	</c:if>
-	<div class="container mt-5">
-	<h3>댓글 보기</h3>
+	<div id="commentBox" class="container mt-5">
+		<h3>댓글 보기</h3>
 		<c:forEach items="${comments }" var="comment">
 			<script type="text/javascript">
 				$(document).ready(function(){
@@ -120,10 +121,6 @@ textarea:focus {
 							$form.attr("action", "${pageContext.request.contextPath }/sample2/comment/remove");
 							$form.submit();
 						}
-					});
-					$commentByComment.click(function(e) {
-						e.preventDefault();
-						$form.append("<br><span>가나다라</span>");
 					});
 				});
 			</script>
