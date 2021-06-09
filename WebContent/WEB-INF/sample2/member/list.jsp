@@ -18,7 +18,7 @@
 	<div class="container">
 	<s2:navbar/>
 		<table class="table">
-			<thead>
+			<thead class="thead-dark">
 				<tr>
 					<th>#</th>
 					<th>아이디</th>
