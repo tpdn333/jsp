@@ -3,8 +3,7 @@ USE test;
 SELECT now();
 
 SELECT * FROM Customers
-WHERE EXISTS (SELECT now())
-;
+WHERE EXISTS (SELECT now());
 
 SELECT * FROM Customers
 WHERE NOT EXISTS (SELECT now())
@@ -17,7 +16,9 @@ WHERE EXISTS (SELECT ProductName
               FROM Products 
               WHERE Products.SupplierID = Suppliers.SupplierID
               AND Price < 20);
-              
+
+SELECT * FROM Products;
+
 SELECT SupplierID, SupplierName
 FROM Suppliers
 WHERE NOT EXISTS (SELECT ProductName 

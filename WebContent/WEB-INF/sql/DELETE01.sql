@@ -6,3 +6,5 @@ DELETE FROM Customers
 WHERE CustomerID = 1;
 
 SELECT * FROM Employees;
+
+select --help;
