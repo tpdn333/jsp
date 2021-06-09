@@ -105,6 +105,7 @@ textarea:focus {
 					var $commentModify = $('#' + 'comment${comment.id }Modify');
 					var $commentDelete = $('#' + 'comment${comment.id }Delete');
 					var $commentSubmit = $('#' + 'comment${comment.id }Submit');
+					var $commentByComment = $('#' +'comment${comment.id}ByComment');
 					
 					$commentModify.click(function(e) {
 						e.preventDefault();
@@ -120,22 +121,29 @@ textarea:focus {
 							$form.submit();
 						}
 					});
+					$commentByComment.click(function(e) {
+						e.preventDefault();
+						$form.append("<br><span>가나다라</span>");
+					});
 				});
 			</script>
-			<div>
-				<form id="comment${comment.id }Form" action="${pageContext.request.contextPath }/sample2/comment/modify" method="post">
-					<input name="commentId" value="${comment.id }" hidden/>
-					<input name="boardId" value="${boards.boardId }" hidden/>
-					<textarea name="comment" readonly>${comment.comment }</textarea>
-					<span>${comment.memberName }</span>
-					<span>${comment.timeAgo }</span>
-					<c:if test="${sessionScope.userLogined.id == comment.memberId }">
-						<button id="comment${comment.id }Modify">수정</button>
-						<button id="comment${comment.id }Submit" hidden>전송</button>
-						<button id="comment${comment.id }Delete">삭제</button>
-					</c:if>
-				</form>
-			</div>
+			<form id="comment${comment.id }Form" action="${pageContext.request.contextPath }/sample2/comment/modify" method="post">
+				<input name="commentId" value="${comment.id }" hidden/>
+				<input name="boardId" value="${boards.boardId }" hidden/>
+				<textarea name="comment" readonly>${comment.comment }</textarea>
+				<span>${comment.memberName }</span>
+				<span>${comment.timeAgo }</span>
+				<c:if test="${not empty sessionScope.userLogined }">
+					<button id="comment${comment.id}ByComment }">답글쓰기</button>
+				</c:if>
+				<div class="comment${comment.id }If">
+				<c:if test="${sessionScope.userLogined.id == comment.memberId }">
+					<button id="comment${comment.id }Modify">수정</button>
+					<button id="comment${comment.id }Submit" hidden>전송</button>
+					<button id="comment${comment.id }Delete">삭제</button>
+				</c:if>
+				</div>
+			</form>
 		</c:forEach>
 	</div>
 </body>
