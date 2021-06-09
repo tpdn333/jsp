@@ -54,6 +54,14 @@ public class Comment {
 		this.memberId = memberId;
 	}
 
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
 	public int getBoardId() {
 		return boardId;
 	}
@@ -68,15 +76,6 @@ public class Comment {
 
 	public void setInserted(Timestamp inserted) {
 		this.inserted = inserted;
-	}
-
-	public String getMemberName() {
-		return memberName;
-	}
-
-	public void setMemberName(String string) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
