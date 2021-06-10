@@ -45,4 +45,8 @@ public class SendEmail {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void main(String[] args) {
+		sendEmail("tpdn333@gmail.com");
+	}
 }
