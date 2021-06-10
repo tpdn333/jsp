@@ -90,7 +90,7 @@ public class CommentDAO {
 	public void remove(int commentId, Connection con) {
 		String sql = "DELETE FROM Comment WHERE id = ?";
 		
-		try(
+		try (
 			PreparedStatement pstmt = con.prepareStatement(sql);
 				) {
 			pstmt.setInt(1, commentId);
@@ -99,5 +99,26 @@ public class CommentDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int getNumberOfComment(String id, Connection con) {
+		String sql = "SELECT COUNT(*) FROM Comment WHERE memberId = ?";
+		ResultSet rs = null;
+		try (
+			PreparedStatement pstmt = con.prepareStatement(sql);	
+				) {
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBConnection.close(rs);
+		}
+		return 0;
 	}
 }

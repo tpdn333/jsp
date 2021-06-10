@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -228,5 +227,88 @@ public class MemberDAO {
 			}
 		}
 		return false;
+	}
+
+	public Member getMember2(String id) {
+		String sql =  "SELECT m.id, "
+					+ "		  m.password, "
+					+ "		  m.name, "
+					+ "		  m.birth, "
+					+ "		  m.gender, "
+					+ "		  m.inserted, "
+					+ "       count(DISTINCT b.id) numberOfBoard, "
+					+ "       count(DISTINCT c.id) numberOfComment " 
+					+ "FROM Member m LEFT JOIN Board b ON m.id = b.memberId "
+					+ "				 LEFT JOIN Comment c ON m.id = c.memberId " 
+					+ "WHERE m.id = ? ";
+		ResultSet rs = null;
+		try (Connection con = DriverManager.getConnection(url, user, password);
+				PreparedStatement pstmt = con.prepareStatement(sql);) {
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				Member member = new Member();
+				member.setId(rs.getString(1));
+				member.setPassword(rs.getString(2));
+				member.setName(rs.getString(3));
+				member.setBirth(rs.getDate(4));
+				member.setGender(rs.getString(5));
+				member.setInserted(rs.getTimestamp(6));
+				member.setNumberOfBoard(rs.getInt(7));
+				member.setNumberOfCommnet(rs.getInt(8));
+
+				return member;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+
+	public Member getMember(String id, Connection con) {
+		String sql = "SELECT id, password, name, birth, gender, inserted " + "FROM Member " + "WHERE id = ? ";
+		ResultSet rs = null;
+		try (
+			PreparedStatement pstmt = con.prepareStatement(sql);
+				) {
+			pstmt.setString(1, id);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				Member member = new Member();
+				member.setId(rs.getString(1));
+				member.setPassword(rs.getString(2));
+				member.setName(rs.getString(3));
+				member.setBirth(rs.getDate(4));
+				member.setGender(rs.getString(5));
+				member.setInserted(rs.getTimestamp(6));
+
+				return member;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
 	}
 }

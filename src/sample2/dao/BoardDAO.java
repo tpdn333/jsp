@@ -11,6 +11,7 @@ import java.util.List;
 
 import sample2.bean.Board;
 import sample2.bean.BoardDTO;
+import sample2.util.DBConnection;
 
 public class BoardDAO {
 	private String url;
@@ -56,6 +57,41 @@ public class BoardDAO {
 		} 
 
 		return false;
+	}
+	
+	public List<BoardDTO> list3() {
+		List<BoardDTO> list = new ArrayList<>();
+		String sql = "SELECT b.id boardId, "
+				+ "			 b.title title, "
+				+ "			 m.name name, "
+				+ "			 count(c.id) numberOfComment, "
+				+ "			 b.inserted " + 
+					 "FROM Board b " + 
+					 "JOIN Member m ON b.memberId = m.id " + 
+					 "LEFT JOIN Comment c ON b.id = c.boardId " + 
+					 "GROUP BY b.id " + 
+					 "ORDER BY boardId DESC ";
+					
+		try(
+				Connection con = DriverManager.getConnection(url, user, password);
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				) {
+			while(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setBoardId(rs.getInt(1));
+				board.setTitle(rs.getString(2));
+				board.setMemberName(rs.getString(3));
+				board.setNumberOfComment(rs.getInt(4));
+				board.setInserted(rs.getTimestamp(5));
+				
+				list.add(board);
+			}
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	public List<BoardDTO> list2() {
@@ -271,6 +307,81 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int getNumberOfBoard(String id, Connection con) {
+		String sql = "SELECT COUNT(*) FROM Board WHERE memberId = ?";
+		ResultSet rs = null;
+		try(
+			PreparedStatement pstmt = con.prepareStatement(sql);	
+				) {
+			pstmt.setNString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+					
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(rs);
+		}
+		return 0;
+	}
+
+	public int countAll() {
+		String sql = "SELECT count(id) FROM Board;";
+		
+		try(
+			Connection con = DriverManager.getConnection(url, user, password);
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+				) {
+			if(rs.next()) {
+			int cnt = rs.getInt(1);
+			return cnt;
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public List<BoardDTO> list4(int page) {
+		List<BoardDTO> list = new ArrayList<>();
+		String sql = "SELECT b.id boardId, "
+				+ "			 b.title title, "
+				+ "			 m.name name, "
+				+ "			 count(c.id) numberOfComment, "
+				+ "			 b.inserted " + 
+					 "FROM Board b " + 
+					 "JOIN Member m ON b.memberId = m.id " + 
+					 "LEFT JOIN Comment c ON b.id = c.boardId " + 
+					 "GROUP BY b.id " + 
+					 "ORDER BY boardId DESC "
+				   + "LIMIT " + (page - 1 ) * 10 + ", 10 ";
+					
+		try(
+				Connection con = DriverManager.getConnection(url, user, password);
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				) {
+			while(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setBoardId(rs.getInt(1));
+				board.setTitle(rs.getString(2));
+				board.setMemberName(rs.getString(3));
+				board.setNumberOfComment(rs.getInt(4));
+				board.setInserted(rs.getTimestamp(5));
+				
+				list.add(board);
+			}
+			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 }
