@@ -106,7 +106,8 @@ textarea:focus {
 					var $commentModify = $('#' + 'comment${comment.id }Modify');
 					var $commentDelete = $('#' + 'comment${comment.id }Delete');
 					var $commentSubmit = $('#' + 'comment${comment.id }Submit');
-					var $commentByComment = $('#' +'comment${comment.id}ByComment');
+					var $commentByComment = $('#' + 'comment${comment.id}ByComment');
+					var $commentText = $('#' + 'comment${comment.id }Text');
 					
 					$commentModify.click(function(e) {
 						e.preventDefault();
@@ -122,6 +123,10 @@ textarea:focus {
 							$form.submit();
 						}
 					});
+					
+					$commentByComment.click(function(){
+						$form.append('<input type="text" class="form-control" id="cbc"/>')
+					});
 				});
 			</script>
 			<form id="comment${comment.id }Form" action="${pageContext.request.contextPath }/sample2/comment/modify" method="post">
@@ -131,7 +136,7 @@ textarea:focus {
 				<span>${comment.memberName }</span>
 				<span>${comment.timeAgo }</span>
 				<c:if test="${not empty sessionScope.userLogined }">
-					<button id="comment${comment.id}ByComment }">답글쓰기</button>
+					<button type="button" id="comment${comment.id}ByComment">답글쓰기</button>
 				</c:if>
 				<div class="comment${comment.id }If">
 				<c:if test="${sessionScope.userLogined.id == comment.memberId }">
@@ -140,6 +145,7 @@ textarea:focus {
 					<button id="comment${comment.id }Delete">삭제</button>
 				</c:if>
 				</div>
+				
 			</form>
 		</c:forEach>
 	</div>
