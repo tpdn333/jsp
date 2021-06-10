@@ -8,8 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import sample2.bean.BoardDTO;
+import sample2.bean.Member;
 import sample2.dao.BoardDAO;
 
 /**
@@ -44,6 +46,10 @@ public class Sample2_Board_List_Servlet extends HttpServlet {
 		List<BoardDTO> boardList = dao.list4(page);
 		int total = dao.countAll();
 		
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("userLogined");
+		
+		request.setAttribute("userLogined", member);
 		request.setAttribute("boards", boardList);
 		request.setAttribute("totalNum", total);
 		
