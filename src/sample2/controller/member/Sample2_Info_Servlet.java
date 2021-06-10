@@ -1,6 +1,7 @@
 package sample2.controller.member;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import sample2.bean.Member;
 import sample2.dao.MemberDAO;
+import sample2.service.member.MemberService;
 
 /**
  * Servlet implementation class Sample2_Info_Servlet
@@ -17,13 +19,19 @@ import sample2.dao.MemberDAO;
 @WebServlet("/sample2/member/info")
 public class Sample2_Info_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private MemberService service;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Sample2_Info_Servlet() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    @Override
+    public void init() throws ServletException {
+    	super.init();
+    	service = new MemberService();
     }
 
 	/**
@@ -34,8 +42,11 @@ public class Sample2_Info_Servlet extends HttpServlet {
 		Member member = (Member) session.getAttribute("userLogined");
 		
 		if (member != null) {
-			MemberDAO dao = new MemberDAO();
-			Member mem = dao.getMember(member.getId());
+//			MemberDAO dao = new MemberDAO();
+//			Member mem = dao.getMember(member.getId());
+//			Member mem = dao.getMember2(member.getId());
+			
+			Member mem = service.getMember(member.getId());
 			
 			request.setAttribute("member", mem);
 			
