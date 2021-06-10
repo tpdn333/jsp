@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sample2.bean.Board;
 import sample2.bean.BoardDTO;
 import sample2.dao.BoardDAO;
 
@@ -32,11 +31,21 @@ public class Sample2_Board_List_Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pageStr = request.getParameter("page");
+		int page = 1;
+		if(pageStr != null) {
+			page = Integer.parseInt(pageStr);
+		}
+		
 		BoardDAO dao = new BoardDAO();
 //		List<Board> boardList = dao.list();
-		List<BoardDTO> boardList = dao.list2();
+//		List<BoardDTO> boardList = dao.list2();
+//		List<BoardDTO> boardList = dao.list3();
+		List<BoardDTO> boardList = dao.list4(page);
+		int total = dao.countAll();
 		
 		request.setAttribute("boards", boardList);
+		request.setAttribute("totalNum", total);
 		
 		String path = "/WEB-INF/sample2/board/list.jsp";
 		request.getRequestDispatcher(path).forward(request, response);
