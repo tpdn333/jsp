@@ -13,16 +13,16 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function() {
-		$("#button1").click(function() {
-			$("#input2, #input3, #input4").removeAttr("readonly");
-			$("#input5").attr("hidden", "hidden");
-			$("#input6").removeAttr("hidden");
-			$("#submit1").removeAttr("hidden");
+		$("#buttonModify").click(function() {
+			$("#inputPW, #inputName, #inputBirth").removeAttr("readonly");
+			$("#inputGender1").attr("hidden", "hidden");
+			$("#inputGender2").removeAttr("hidden");
+			$("#submitForm1").removeAttr("hidden");
 		});
 		
-		$("#submit2").click(function(e) {
+		$("#submitDelete").click(function(e) {
 			e.preventDefault();
-			console.log("submit2 clicked.....");
+			console.log("submitDelete clicked.....");
 			
 			var con = confirm("탈퇴 하시겠습니까??");
 			
@@ -41,31 +41,35 @@
 	<s2:navbar/>
 	<form id="form1" action="${pageContext.request.contextPath }/sample2/member/modify" method="post">
 		아이디 : <br>
-		<input id="input1" type="text" name="id" value="${member.id }" readonly> <br>
+		<input id="inputId" type="text" name="id" value="${member.id }" readonly> <br>
 		비밀번호 : <br>
-		<input id="input2" type="password" name="password" value="${member.password }" readonly> <br>
+		<input id="inputPW" type="password" name="password" value="${member.password }" readonly> <br>
 		이름 : <br>	
-		<input id="input3" type="text" name="name" value="${member.name }" readonly> <br>
+		<input id="inputName" type="text" name="name" value="${member.name }" readonly> <br>
 		생년월일: <br>
-		<input id="input4" type="date" name="birth" value="${member.birth }" readonly> <br>
+		<input id="inputBirth" type="date" name="birth" value="${member.birth }" readonly> <br>
 		성별 : <br>
-		<input id="input5" type="text" value="${member.gender }" readonly> <br>
-		<select id="input6" name="gender" hidden>
+		<input id="inputGender1" type="text" value="${member.gender }" readonly> <br>
+		<select id="inputGender2" name="gender" hidden>
 			<option value="">성별</option>
 			<option value="Male">남자</option>
 			<option value="Female">여자</option>
 			<option value="NULL">선택 안함</option>
 		</select> <br>
-		<button id="button1" type="button" >수정</button>
-		<input type="submit" id="submit1" value="전송" hidden>
+		<button id="buttonModify" type="button" >수정</button>
+		<input type="submit" id="submitFrom1" value="전송" hidden>
 	</form>
 	
 	<s2:message/>
 </div>
-
+<div class="container">
+	작성한 게시물 : <span>${member.numberOfBoard}</span>개 <br>
+	작성한 댓글 : <span>${member.numberOfComment }</span>개
+	
+</div>
 <div class="container">
 	<form id="form2" action="${pageContext.request.contextPath}/sample2/member/remove" method="post">
-		<input id="submit2" type="submit" value="탈퇴">
+		<input id="submitDelete" type="submit" value="탈퇴">
 	</form>
 </div>
 </body>
