@@ -32,12 +32,12 @@ public class BoardAppListener implements ServletContextListener {
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
-    public void contextInitialized(ServletContextEvent sce)  {
-    	System.out.println("BoardAppListener Initialized.....");
-    	ServletContext application = sce.getServletContext();
-    	List<Board> list = new ArrayList<Board>();
-    	
-    	application.setAttribute("board", list);
-    }
+//    public void contextInitialized(ServletContextEvent sce)  {
+//    	System.out.println("BoardAppListener Initialized.....");
+//    	ServletContext application = sce.getServletContext();
+//    	List<Board> list = new ArrayList<Board>();
+//    	
+//    	application.setAttribute("board", list);
+//    }
 	
 }
