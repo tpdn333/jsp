@@ -99,21 +99,17 @@ textarea:focus {
 	</c:if>
 	<div id="commentBox" class="container mt-5">
 		<h3>댓글 보기</h3>
-		<c:forEach items="${comments }" var="comment" varStatus="cnt">
+		<c:forEach items="${comments }" var="comment">
 			<script type="text/javascript">
 				$(document).ready(function(){
-					
 					var $form = $('#' + 'comment${comment.id }Form'); 
 					var $commentModify = $('#' + 'comment${comment.id }Modify');
 					var $commentDelete = $('#' + 'comment${comment.id }Delete');
 					var $commentSubmit = $('#' + 'comment${comment.id }Submit');
-					
-					var cntReply = 1;
 					var $replyWrite = $('#' + 'comment${comment.id}reply');
 					var $replyText = $('#' + 'comment${comment.id }Text');
-					var $replyButton = $('#' + 'B${boards.boardId }_C${comment.id}_ReplyButton');
-					var $comment_reply_box = $('#' + 'comment${comment.id }_reply_box');
-					var $replyReigeter = $('#' + 'B${boards.boardId }_C${comment.id}_R');
+					var $commnetByComment = $('#' + 'board${boards.boardId }_Comment${comment.id}_relpy');
+					var $comment_reply_box = $('#' + 'comment${comment.id }_relpy_box');
 					
 					$commentModify.click(function(e) {
 						e.preventDefault();
@@ -130,19 +126,11 @@ textarea:focus {
 						}
 					});
 					
-					$replyWrite.click(function(){
-						$comment_reply_box.append('<textarea placeholder="${userLogined.name }:" id="comment${comment.id }_reply_text"></textarea>'
-												 +'<c:if test="${not empty sessionScope.userLogined }">'
-												 +'<button type="button" id="B${boards.boardId }_C${comment.id}_R">등록</button><br>'
-												 +'</c:if>');
-						var $replyReigeter = $('#' + 'B${boards.boardId }_C${comment.id}_R');
-						$replyWrite.hide();
+					$commentByWrite.click(function(){
+						$form.find($comment_reply_box).append('<textarea placeholder="${userLogined.name }:" id="comment${comment.id }_relpy_text"></textarea><br>');
+						$commnetByComment.removeAttr("hidden");
 						
 					});
-					$replyReigeter.click(function() {
-						$replyWrite.show();
-					});
-					
 				});
 			</script>
 			<form id="comment${comment.id }Form" action="${pageContext.request.contextPath }/sample2/comment/modify" method="post">
@@ -154,20 +142,23 @@ textarea:focus {
 				<c:if test="${not empty sessionScope.userLogined }">
 					<button type="button" id="comment${comment.id}reply">답글쓰기</button>
 				</c:if>
-				<c:if test="${sessionScope.userLogined.id == comment.memberId }">
-					<button id="comment${comment.id }Modify">수정</button>
-					<button id="comment${comment.id }Submit" hidden>전송</button>
-					<button id="comment${comment.id }Delete">삭제</button>
-				</c:if>
-				<div style="padding-left: 30px" id="comment${comment.id }_reply_box">
-				</div>
-				<div style="padding-left: 30px" hidden id="B${boards.boardId }_C${comment.id}_ReplyButton">
+				<div class="comment${comment.id }If">
 					<c:if test="${sessionScope.userLogined.id == comment.memberId }">
-						<button type="button" id=btn1>수정</button>
+						<button id="comment${comment.id }Modify">수정</button>
+						<button id="comment${comment.id }Submit" hidden>전송</button>
+						<button id="comment${comment.id }Delete">삭제</button>
+					</c:if>
+				</div>
+				<div hidden id="board${boards.boardId }_Comment${comment.id}">
+					<c:if test="${sessionScope.userLogined.id == boards.memberId }">
+						<button type="button" class="btn btn-primary" id=btn1>수정</button>
+						<!-- 버튼이 form안에있으면 submit이다 type 변경 -->
 						<input hidden type="submit" class="btn btn-primary" id="submit1" value="등록"/>
-						<button type="button" id="delete">삭제</button>
+						<button type="button" class="btn btn-primary" id="delete">삭제</button>
 						<input type="number" value="${boards.boardId }" name="boardId" hidden >
 					</c:if>
+				</div>
+				<div style="padding:20px" class="comment${comment.id }_relpy_box">
 				</div>
 			</form>
 		</c:forEach>
