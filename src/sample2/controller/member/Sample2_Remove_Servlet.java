@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import sample2.bean.Member;
-import sample2.service.member.MemberRemoveService;
+import sample2.service.member.MemberService;
 
 /**
  * Servlet implementation class Sample2RemoveServlet
@@ -18,7 +18,7 @@ import sample2.service.member.MemberRemoveService;
 @WebServlet("/sample2/member/remove")
 public class Sample2_Remove_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private MemberRemoveService service = null; 
+	private MemberService service = null; 
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -29,7 +29,7 @@ public class Sample2_Remove_Servlet extends HttpServlet {
     }
     @Override
     public void init() throws ServletException {
-    	this.service = new MemberRemoveService(); 
+    	this.service = new MemberService(); 
     	super.init();
     }
 
