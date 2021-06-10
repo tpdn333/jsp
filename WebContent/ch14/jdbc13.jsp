@@ -2,7 +2,7 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -17,6 +17,9 @@
 </head>
 <body>
 	<div class="container">
+	<fmt:formatNumber value="${15/10+(1-(10/2%1))%1 }" pattern="#"/><br>
+
+
 		<table class="table">
 			<thead>
 				<tr>
