@@ -14,7 +14,7 @@ public class Board {
 	public String getTimeAgo() {
 		long now = System.currentTimeMillis();
 		long inserted = this.inserted.getTime();
-		long diff = (now - inserted) / 1000;
+		long diff = (32400000 + now - inserted) / 1000;
 		String msg = "";
 		if (diff < 60) {
 			msg = diff + "초 전";
