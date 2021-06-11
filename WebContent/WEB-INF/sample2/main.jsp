@@ -14,10 +14,7 @@
 </style>
 </head>
 <body>
-	<div class="jumbotron text-center" style="margin-bottom: 0">
-		<h1>Welcome !</h1>
-		<p>Resize this responsive page to see the effect!</p>
-	</div>
+	<s2:main_header/>
 	<s2:navbar/>
 	<div class="container" style="margin-top: 30px">
 		<div class="row">
