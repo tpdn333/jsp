@@ -31,9 +31,11 @@
       <li class="nav-item">
         <a class="nav-link" href="<%= request.getContextPath()%>/sample2/board/write">글쓰기</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<%= request.getContextPath()%>/sample2/member/list">회원 목록보기</a>
-      </li>
+      </c:if>
+      <c:if test="${sessionScope.userLogined.id == 'tpdn333' }">
+	      <li class="nav-item">
+	        <a class="nav-link" href="<%= request.getContextPath()%>/sample2/member/list">회원 목록보기</a>
+	      </li>
       </c:if>
       <li class="nav-item">
         <a class="nav-link" href="<%= request.getContextPath()%>/sample2/board/list">글 목록보기</a>
