@@ -49,8 +49,9 @@ textarea:focus {
 </style>
 </head>
 <body>
+	<s2:main_header/>
+	<s2:navbar/>
 	<div class="container">
-		<s2:navbar/>
 		<h1>글 보기</h1>
 		<div class="justify-content-center">
 			<form id="form1" action="${pageContext.request.contextPath }/sample2/board/modify?boardId=${boards.boardId }" method="post">
@@ -99,78 +100,78 @@ textarea:focus {
 	</c:if>
 	<div id="commentBox" class="container mt-5">
 		<h3>댓글 보기</h3>
-		<c:forEach items="${comments }" var="comment" varStatus="cnt">
-			<script type="text/javascript">
-				$(document).ready(function(){
-					
-					var $form = $('#' + 'comment${comment.id }Form'); 
-					var $commentModify = $('#' + 'comment${comment.id }Modify');
-					var $commentDelete = $('#' + 'comment${comment.id }Delete');
-					var $commentSubmit = $('#' + 'comment${comment.id }Submit');
-					
-					var cntReply = 1;
-					var $replyWrite = $('#' + 'comment${comment.id}reply');
-					var $replyText = $('#' + 'comment${comment.id }Text');
-					var $replyButton = $('#' + 'B${boards.boardId }_C${comment.id}_ReplyButton');
-					var $comment_reply_box = $('#' + 'comment${comment.id }_reply_box');
-					var $replyReigeter = $('#' + 'B${boards.boardId }_C${comment.id}_R');
-					
-					$commentModify.click(function(e) {
-						e.preventDefault();
-						$form.find("textarea").removeAttr("readonly");
-						$(this).attr("hidden", "hidden");
-						$commentSubmit.removeAttr("hidden");
-					});
-					
-					$commentDelete.click(function(e) {
-						e.preventDefault();
-						if(confirm("댓글을 삭제 하시겠습니까?")) {
-							$form.attr("action", "${pageContext.request.contextPath }/sample2/comment/remove");
-							$form.submit();
-						}
-					});
-					
-					$replyWrite.click(function(){
-						$comment_reply_box.append('<textarea placeholder="${userLogined.name }:" id="comment${comment.id }_reply_text"></textarea>'
-												 +'<c:if test="${not empty sessionScope.userLogined }">'
-												 +'<button type="button" id="B${boards.boardId }_C${comment.id}_R">등록</button><br>'
-												 +'</c:if>');
+		<ul style="list-style:none">
+			<c:forEach items="${comments }" var="comment" varStatus="cnt">
+				<script type="text/javascript">
+					$(document).ready(function(){
+						
+						var $form = $('#' + 'comment${comment.id }Form'); 
+						var $commentModify = $('#' + 'comment${comment.id }Modify');
+						var $commentDelete = $('#' + 'comment${comment.id }Delete');
+						var $commentSubmit = $('#' + 'comment${comment.id }Submit');
+						
+						var cntReply = 1;
+						var $replyWrite = $('#' + 'comment${comment.id}reply');
+						var $replyText = $('#' + 'comment${comment.id }Text');
+						var $replyButton = $('#' + 'B${boards.boardId }_C${comment.id}_ReplyButton');
+						var $comment_reply_box = $('#' + 'comment${comment.id }_reply_box');
 						var $replyReigeter = $('#' + 'B${boards.boardId }_C${comment.id}_R');
-						$replyWrite.hide();
+						
+						$commentModify.click(function(e) {
+							e.preventDefault();
+							$form.find("textarea").removeAttr("readonly");
+							$(this).attr("hidden", "hidden");
+							$commentSubmit.removeAttr("hidden");
+						});
+						
+						$commentDelete.click(function(e) {
+							e.preventDefault();
+							if(confirm("댓글을 삭제 하시겠습니까?")) {
+								$form.attr("action", "${pageContext.request.contextPath }/sample2/comment/remove");
+								$form.submit();
+							}
+						});
+						
+						$replyWrite.click(function(){
+							$comment_reply_box.append('<i class="fas fa-reply fa-flip-both"></i>'
+													 +'<textarea placeholder="${userLogined.name }:" id="comment${comment.id }_reply_text"></textarea>'
+													 +'<c:if test="${not empty sessionScope.userLogined }">'
+													 +'<button type="button" id="B${boards.boardId }_C${comment.id}_R">등록</button><br>'
+													 +'</c:if>');
+							
+						});
+						
 						
 					});
-					$replyReigeter.click(function() {
-						$replyWrite.show();
-					});
-					
-				});
-			</script>
-			<form id="comment${comment.id }Form" action="${pageContext.request.contextPath }/sample2/comment/modify" method="post">
-				<input name="commentId" value="${comment.id }" hidden/>
-				<input name="boardId" value="${boards.boardId }" hidden/>
-				<textarea name="comment" readonly>${comment.comment }</textarea>
-				<span>${comment.memberName }</span>
-				<span>${comment.timeAgo }</span>
-				<c:if test="${not empty sessionScope.userLogined }">
-					<button type="button" id="comment${comment.id}reply">답글쓰기</button>
-				</c:if>
-				<c:if test="${sessionScope.userLogined.id == comment.memberId }">
-					<button id="comment${comment.id }Modify">수정</button>
-					<button id="comment${comment.id }Submit" hidden>전송</button>
-					<button id="comment${comment.id }Delete">삭제</button>
-				</c:if>
-				<div style="padding-left: 30px" id="comment${comment.id }_reply_box">
-				</div>
-				<div style="padding-left: 30px" hidden id="B${boards.boardId }_C${comment.id}_ReplyButton">
-					<c:if test="${sessionScope.userLogined.id == comment.memberId }">
-						<button type="button" id=btn1>수정</button>
-						<input hidden type="submit" class="btn btn-primary" id="submit1" value="등록"/>
-						<button type="button" id="delete">삭제</button>
-						<input type="number" value="${boards.boardId }" name="boardId" hidden >
+				</script>
+				
+				<li><form id="comment${comment.id }Form" action="${pageContext.request.contextPath }/sample2/comment/modify" method="post">
+					<input name="commentId" value="${comment.id }" hidden/>
+					<input name="boardId" value="${boards.boardId }" hidden/>
+					<textarea name="comment" readonly>${comment.comment }</textarea>
+					<span>${comment.memberName }</span>
+					<span>${comment.timeAgo }</span>
+					<c:if test="${not empty sessionScope.userLogined }">
+						<button type="button" id="comment${comment.id}reply">답글쓰기</button>
 					</c:if>
-				</div>
-			</form>
-		</c:forEach>
+					<c:if test="${sessionScope.userLogined.id == comment.memberId }">
+						<button id="comment${comment.id }Modify">수정</button>
+						<button id="comment${comment.id }Submit" hidden>전송</button>
+						<button id="comment${comment.id }Delete">삭제</button>
+					</c:if>
+					<div style="padding-left: 30px" id="comment${comment.id }_reply_box">
+					</div>
+					<div style="padding-left: 30px" hidden id="B${boards.boardId }_C${comment.id}_ReplyButton">
+						<c:if test="${sessionScope.userLogined.id == comment.memberId }">
+							<button type="button" id=btn1>수정</button>
+							<input hidden type="submit" class="btn btn-primary" id="submit1" value="등록"/>
+							<button type="button" id="delete">삭제</button>
+							<input type="number" value="${boards.boardId }" name="boardId" hidden >
+						</c:if>
+					</div>
+				</form></li>
+			</c:forEach>
+		</ul>
 	</div>
 </body>
 </html>

@@ -20,31 +20,40 @@
 </style>
 </head>
 <body>
+	<s2:main_header/>
+	<s2:navbar/>
 	<div class="container">
-		<s2:navbar/>
 		<h3>글 목록<span style="font-size:15px"> 전체글 ${totalNum }개</span></h3>
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
-					<th class="col-md-2">#</th>
+					<th class="col-md-1">#</th>
 					<th class="col-md-5">제목</th>
 					<th class="col-md-2">작성자</th>
 					<th class="col-md-3">작성 시간</th>
+					<th class="col-md-1">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${boards }" var="board" varStatus="status">
 					<tr>
 						<th scope="row">${board.boardId }</th>
-						<td><a href="<%= request.getContextPath()%>/sample2/board/detail?boardId=${board.boardId }">
+						<td><a href="<%= request.getContextPath()%>/sample2/board/detail?boardId=${board.boardId }&b_memberId=${board.memberId }">
 							${board.title} 
 							</a>
 							<c:if test="${board.numberOfComment ne 0 }">
-								<span style="font-style: normal; font-weight: bold; color: #ff2f3b">[${board.numberOfComment }]</span>
+								<span style="font-style: normal; color: #ff2f3b">[${board.numberOfComment }]</span>
+								<!-- <div class="fa-2x">
+									<span class="fa-layers fa-fw" style="background:White">
+								    	<i class="fas fa-envelope"></i>
+								    	<span class="fa-layers-counter" style="background:Tomato">${board.numberOfComment }</span>
+								  	</span>
+								</div> -->
 							</c:if>
 						</td>
 						<td>${board.memberName }</td>
 						<td>${board.timeAgo }</td>
+						<td>${board.views }</td>
 					</tr>
 					</c:forEach>
 			</tbody>
