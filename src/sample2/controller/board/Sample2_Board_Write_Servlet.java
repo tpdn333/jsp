@@ -58,6 +58,7 @@ public class Sample2_Board_Write_Servlet extends HttpServlet {
 			String path = request.getContextPath() + "/sample2/board/list";
 			response.sendRedirect(path);
 		} else {
+			System.out.println("게시물 쓰기 실패");
 			String path = "/WEB-INF/sample2/board/write.jsp";
 			request.getRequestDispatcher(path).forward(request, response);
 		}
