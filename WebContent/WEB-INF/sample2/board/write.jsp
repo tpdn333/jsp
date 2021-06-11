@@ -16,6 +16,7 @@
 <body>
 <s2:navbar/>
 	<div class="container">
+		<h1>글 작성</h1>
 		<form action="${pageContext.request.contextPath }/sample2/board/write" method="post">
 			<div class="form-group">
 				<label for="title1">제목</label> 

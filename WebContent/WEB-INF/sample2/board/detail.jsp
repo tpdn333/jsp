@@ -140,6 +140,9 @@ textarea:focus {
 													 +'</c:if>');
 							
 						});
+						$("body").on("click", "B${boards.boardId }_C${comment.id}_R", function(){
+							
+						});
 						
 						
 					});
