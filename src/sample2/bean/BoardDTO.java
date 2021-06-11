@@ -11,6 +11,15 @@ public class BoardDTO {
 	private String memberId;
 	private Timestamp inserted;
 	private int numberOfComment;
+	private int views;
+
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
 
 	public int getNumberOfComment() {
 		return numberOfComment;

@@ -9,32 +9,43 @@ public class Board {
 	private String body;
 	private String memberId;
 	private Timestamp inserted;
+	private int views;
 
 	public String getTimeAgo() {
 		long now = System.currentTimeMillis();
 		long inserted = this.inserted.getTime();
 		long diff = (now - inserted) / 1000;
 		String msg = "";
-		if(diff < 60) {
+		if (diff < 60) {
 			msg = diff + "초 전";
-		} else if((diff /= 60) < 60) {
+		} else if ((diff /= 60) < 60) {
 			msg = diff + "분 전";
-		} else if((diff /= 60) < 24) {
+		} else if ((diff /= 60) < 24) {
 			msg = diff + "시간 전";
-		} else if((diff /= 24) < 30) {
+		} else if ((diff /= 24) < 30) {
 			msg = diff + "일 전";
 		} else {
 			msg = new SimpleDateFormat("yy/MM/dd").format(this.inserted);
 		}
 		return msg;
 	}
+
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
+
 	public String getMemberIdHidden() {
 		String star = "";
-		for(int i = 0; i < this.memberId.length() - 2; i ++) {
+		for (int i = 0; i < this.memberId.length() - 2; i++) {
 			star += "*";
 		}
-		return memberId.substring(0,2) + star;
+		return memberId.substring(0, 2) + star;
 	}
+
 	public int getId() {
 		return id;
 	}
