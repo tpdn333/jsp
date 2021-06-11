@@ -50,8 +50,9 @@
 </script>
 </head>
 <body>
-	<div class="container mt-3">
+	<s2:main_header/>
 	<s2:navbar/>
+	<div class="container mt-3">
 		<form id="signup" action="<%=request.getContextPath()%>/sample2/member/signup" method="post">
 			<div class="row form-group">
 				<div class="col-10">

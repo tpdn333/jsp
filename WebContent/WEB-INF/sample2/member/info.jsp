@@ -37,8 +37,9 @@
 
 </head>
 <body>
+<s2:main_header/>
+<s2:navbar/>
 <div class="container">
-	<s2:navbar/>
 	<form id="form1" action="${pageContext.request.contextPath }/sample2/member/modify" method="post">
 		아이디 : <br>
 		<input id="inputId" type="text" name="id" value="${member.id }" readonly> <br>

@@ -14,9 +14,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<div class="container">
+	<s2:main_header/>
 	<s2:navbar/>
+	<div class="container">
 		<h1> 로그인</h1>
 		<form action="${pageContext.request.contextPath }/sample2/member/login" method="post">
 			아이디 <br>

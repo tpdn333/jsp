@@ -15,8 +15,9 @@
 </head>
 
 <body>
-	<div class="container">
+	<s2:main_header/>
 	<s2:navbar/>
+	<div class="container">
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
