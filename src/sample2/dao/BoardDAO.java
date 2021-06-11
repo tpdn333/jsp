@@ -155,7 +155,8 @@ public class BoardDAO {
 				   + "		 b.body body, "
 				   + "		 m.name memberName, "
 				   + " 		 m.id memberID ,"
-				   + "		 b.inserted "
+				   + "		 b.inserted, "
+				   + "  	 b.views "
 				   + "FROM Board b JOIN Member m "
 				   + "ON b.memberId = m.id "
 				   + "WHERE b.id = ? ";
@@ -315,7 +316,7 @@ public class BoardDAO {
 		try(
 			PreparedStatement pstmt = con.prepareStatement(sql);	
 				) {
-			pstmt.setNString(1, id);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -354,7 +355,9 @@ public class BoardDAO {
 				+ "			 b.title title, "
 				+ "			 m.name name, "
 				+ "			 count(c.id) numberOfComment, "
-				+ "			 b.inserted " + 
+				+ "			 b.inserted, " + 
+				  " 		 b.views, " +
+				  	 "		 m.id memberId " +
 					 "FROM Board b " + 
 					 "JOIN Member m ON b.memberId = m.id " + 
 					 "LEFT JOIN Comment c ON b.id = c.boardId " + 
@@ -374,6 +377,8 @@ public class BoardDAO {
 				board.setMemberName(rs.getString(3));
 				board.setNumberOfComment(rs.getInt(4));
 				board.setInserted(rs.getTimestamp(5));
+				board.setViews(rs.getInt(6));
+				board.setMemberId(rs.getString(7));
 				
 				list.add(board);
 			}
@@ -383,5 +388,67 @@ public class BoardDAO {
 		}
 		return list;
 	}
+
+
+	public void doardViews(int id, Connection con) {
+		String sql = "UPDATE Board SET views = views + 1 WHERE id = ?";
+		
+		try (
+			PreparedStatement pstmt = con.prepareStatement(sql);	
+				) {
+			
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public BoardDTO get(int id, Connection con) {
+		String sql = "SELECT b.id boardId, "
+				   + "		 b.title title, "
+				   + "		 b.body body, "
+				   + "		 m.name memberName, "
+				   + " 		 m.id memberID ,"
+				   + "		 b.inserted, "
+				   + "  	 b.views "
+				   + "FROM Board b JOIN Member m "
+				   + "ON b.memberId = m.id "
+				   + "WHERE b.id = ? ";
+		ResultSet rs = null;
+		try (
+			PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setInt(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setBoardId(id);
+				board.setTitle(rs.getString(2));
+				board.setBody(rs.getString(3));
+				board.setMemberName(rs.getString(4));
+				board.setMemberId(rs.getString(5));
+				board.setInserted(rs.getTimestamp(6));
+				board.setViews(rs.getInt(7));
+				
+				return board;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
 	
 }
