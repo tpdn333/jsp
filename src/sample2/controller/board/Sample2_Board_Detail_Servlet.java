@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import sample2.bean.BoardDTO;
 import sample2.bean.Comment;
+import sample2.bean.Member;
 import sample2.dao.BoardDAO;
+import sample2.service.board.BoardService;
 import sample2.service.comment.CommentService;
 
 
@@ -22,6 +25,7 @@ import sample2.service.comment.CommentService;
 public class Sample2_Board_Detail_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static CommentService commentService = null;
+	private static BoardService boardService = null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,7 +39,8 @@ public class Sample2_Board_Detail_Servlet extends HttpServlet {
     public void init() throws ServletException {
     	// TODO Auto-generated method stub
     	super.init();
-    	this.commentService = new CommentService();
+    	commentService = new CommentService();
+    	boardService = new BoardService();
     }
     
 	/**
@@ -43,16 +48,23 @@ public class Sample2_Board_Detail_Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String boardId = request.getParameter("boardId");
+		String b_memberId = request.getParameter("b_memberId");
+		
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("userLogined");
 		
 		if(boardId == null) {
 			String path = request.getContextPath() + "/sample2/board/detail";
 			response.sendRedirect(path);
 		} else {
-			BoardDAO dao = new BoardDAO();
-			BoardDTO board = dao.get2(Integer.parseInt(boardId));
+//			BoardDAO dao = new BoardDAO();
+//			BoardDTO board = dao.get2(Integer.parseInt(boardId));
+			if (!member.getId().equals(b_memberId)) {
+				BoardDTO board = boardService.get(Integer.parseInt(boardId));
+				request.setAttribute("boards", board);
+			}
 			
 			List<Comment> commentList = commentService.list(Integer.parseInt(boardId));
-			request.setAttribute("boards", board);
 			request.setAttribute("comments", commentList);
 			
 			String path = "/WEB-INF/sample2/board/detail.jsp";
