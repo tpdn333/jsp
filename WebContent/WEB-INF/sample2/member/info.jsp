@@ -58,7 +58,7 @@
 			<option value="NULL">선택 안함</option>
 		</select> <br>
 		<button id="buttonModify" type="button" >수정</button>
-		<input type="submit" id="submitFrom1" value="전송" hidden>
+		<input type="submit" id="submitForm1" value="전송" hidden>
 	</form>
 	
 	<s2:message/>
